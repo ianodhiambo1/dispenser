@@ -5,7 +5,7 @@ if ($_SERVER['REQUEST_METHOD']=='POST'){
     $username = $_POST['user_login'];
     $password = $_POST['user_password'];
     $sql= "SELECT * FROM user WHERE username = '$username' AND password = '$password' ";
-    $result = mysqli_query($con,$sql);
+    $result = mysqli_query($connection,$sql);
     $check = mysqli_fetch_array($result);
     if(isset($check)){
     echo 'success';
