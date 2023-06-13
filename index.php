@@ -62,6 +62,7 @@ if(isset($_GET['delete_all'])){
 
    <!-- custom css file link  -->
    <link rel="stylesheet" href="./style.css">
+   <script src="https://kit.fontawesome.com/a076d05399.js"></script>
 
 </head>
 <body>
@@ -75,25 +76,27 @@ if(isset($message)){
 ?>
 
 <div class="container">
-
-<div class="user-profile">
-
-   <?php
+<nav>
+		<input type="checkbox" id="check">
+		<label for="check" class="checkbtn">
+			<i class="fas fa-bars"></i>
+		</label>
+		<label class="logo">Store Logo</label>
+		<ul>
+      <?php
       $select_user = mysqli_query($conn, "SELECT * FROM `user_info` WHERE id = '$user_id'") or die('query failed');
       if(mysqli_num_rows($select_user) > 0){
          $fetch_user = mysqli_fetch_assoc($select_user);
       };
    ?>
+			<li><a href="index.php?logout=<?php echo $user_id; ?>" onclick="return confirm('are your sure you want to logout?');" class="logout">logout</a></li>
+         <img src="images/userLogo.png" alt="UserLogo" width="35px" style="padding-top: 10px;" >
+			<li><span><?php echo $fetch_user['name']; ?></span></li>
+		</ul>
+	</nav>
 
-   <p> username : <span><?php echo $fetch_user['name']; ?></span> </p>
-   <p> email : <span><?php echo $fetch_user['email']; ?></span> </p>
-   <div class="flex">
-      <a href="login.php" class="btn">login</a>
-      <a href="register.php" class="option-btn">register</a>
-      <a href="index.php?logout=<?php echo $user_id; ?>" onclick="return confirm('are your sure you want to logout?');" class="delete-btn">logout</a>
-   </div>
 
-</div>
+
 
 <div class="products">
 
@@ -107,7 +110,7 @@ if(isset($message)){
          while($fetch_product = mysqli_fetch_assoc($select_product)){
    ?>
       <form method="post" class="box" action="">
-         <img src="images/<?php echo $fetch_product['image']; ?>" alt="">
+         <img  src="images/<?php echo $fetch_product['image']; ?>" alt="">
          <div class="name"><?php echo $fetch_product['name']; ?></div>
          <div class="price">$<?php echo $fetch_product['price']; ?>/-</div>
          <input type="number" min="1" name="product_quantity" value="1">
