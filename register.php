@@ -12,10 +12,10 @@ if(isset($_POST['submit'])){
    $select = mysqli_query($conn, "SELECT * FROM `user_info` WHERE email = '$email' AND password = '$pass'") or die('query failed');
 
    if(mysqli_num_rows($select) > 0){
-      $message[] = 'user already exist!';
+      $messages[] = 'user already exist!';
    }else{
       mysqli_query($conn, "INSERT INTO `user_info`(name, email, password) VALUES('$name', '$email', '$pass')") or die('query failed');
-      $message[] = 'registered successfully!';
+      $messages[] = 'registered successfully!';
       header('location:login.php');
    }
 
@@ -32,14 +32,14 @@ if(isset($_POST['submit'])){
    <title>register</title>
 
    <!-- custom css file link  -->
-   <link rel="stylesheet" href="./style.css">
+   <link rel="stylesheet" href="style2.css">
 
 </head>
 <body>
 
 <?php
 if(isset($message)){
-   foreach($message as $message){
+   foreach($messages as $message){
       echo '<div class="message" onclick="this.remove();">'.$message.'</div>';
    }
 }
