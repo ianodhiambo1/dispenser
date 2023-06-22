@@ -27,6 +27,12 @@ $result = mysqli_query($conn, $query);
     .pagination a:hover:not(.active) {
       background-color: #ddd;
     }
+    .action{
+    margin: 10px; 
+    font-size: medium; 
+    cursor: pointer; 
+    padding:10px; 
+}
   </style>
 </head>
 <body>
@@ -38,6 +44,7 @@ $result = mysqli_query($conn, $query);
       <th>Last Name</th>
       <th>Age</th>
       <th>Address</th>
+      <th>Action</th>
     </tr>
     <?php
        if (isset($_POST['delete'])) {
@@ -45,6 +52,12 @@ $result = mysqli_query($conn, $query);
         $query = "DELETE FROM patients WHERE pt_ID = '$id'";
         mysqli_query($conn, $query);
       }
+       // Handle update button click
+    if (isset($_POST['update'])) {
+      $id = $_POST['update'];
+      header("Location: update_page.php?id=$id");
+      exit();
+    }
 
 if (mysqli_num_rows($result) > 0) {
   while($data = mysqli_fetch_assoc($result)) {
@@ -55,8 +68,9 @@ if (mysqli_num_rows($result) > 0) {
    <td><?php echo $data['pt_lname']; ?> </td>
    <td><?php echo $data['pt_age']; ?> </td>
    <td><?php echo $data['pt_address']; ?> </td>
-   <td><form method='POST' onsubmit="return confirm('Are you sure you want to delete this record?')">
-              <button type='submit' name='delete' value="<?php echo $data['pt_ID']; ?> " style="margin: 10px; font-size: medium; cursor: pointer; ">Delete</button>
+   <td><form method='POST' onsubmit="return confirm('Are you sure you want to modify this record?')">
+              <button type='submit' name='delete' value="<?php echo $data['pt_ID']; ?> "  class="action">Delete</button>
+              <button type='submit' name='update' value="<?php echo $data['pt_ID']; ?> " class="action">Update</button>
               </form></td>
  <tr>
    <?php
