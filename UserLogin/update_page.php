@@ -8,7 +8,8 @@
       width: 100px;
     }
     input[type="text"] {
-      width: 200px;
+      width: 700px;
+      height: 50px;
     }
     input[type="submit"] {
       margin-top: 10px;
@@ -23,16 +24,7 @@
 <body>
 <?php
 // Database connection
-$host = "localhost";
-$username = "your_username";
-$password = "your_password";
-$dbname = "your_database_name";
-
-$conn = mysqli_connect($host, $username, $password, $dbname);
-
-if (!$conn) {
-  die("Connection failed: " . mysqli_connect_error());
-}
+include('config.php');
 
 // Check if the form is submitted
 if ($_SERVER["REQUEST_METHOD"] == "POST") {
@@ -66,15 +58,15 @@ mysqli_close($conn);
 
 <h2>Update Patient</h2>
 <form method="POST" action="">
-  <input type="hidden" name="pt_ID" value="<?php echo $data['pt_ID']; ?>">
+  <input type="hidden" name="pt_ID" value="<?php echo $row['pt_ID']; ?>">
   <label for="pt_fname">First Name:</label>
-  <input type="text" name="pt_fname" value="<?php echo $data['pt_fname']; ?>"><br>
+  <input type="text" name="pt_fname" value="<?php echo $row['pt_fname']; ?>"><br>
   <label for="pt_lname">Last Name:</label>
-  <input type="text" name="pt_lname" value="<?php echo $data['pt_lname']; ?>"><br>
+  <input type="text" name="pt_lname" value="<?php echo $row['pt_lname']; ?>"><br>
   <label for="pt_age">Age:</label>
-  <input type="text" name="pt_age" value="<?php echo $data['pt_age']; ?>"><br>
+  <input type="text" name="pt_age" value="<?php echo $row['pt_age']; ?>"><br>
   <label for="pt_address">Address:</label>
-  <input type="text" name="pt_address" value="<?php echo $data['pt_address']; ?>"><br>
+  <input type="text" name="pt_address" value="<?php echo $row['pt_address']; ?>"><br>
   <input type="submit" value="Update">
 </form>
 
