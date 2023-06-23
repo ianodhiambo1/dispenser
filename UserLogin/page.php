@@ -36,6 +36,7 @@ $result = mysqli_query($conn, $query);
   </style>
 </head>
 <body>
+  <button class="action" ><a style="color: black;" href="add_patients.php">Add Patient</a></button>
   
   <table border ="1" cellspacing="0" cellpadding="10" id="myTable">
     <tr>
